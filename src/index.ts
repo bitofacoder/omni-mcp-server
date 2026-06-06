@@ -12,6 +12,7 @@ import { getSlackTools, handleSlackToolCall } from './tools/slack.js';
 import { getSystemTools, handleSystemToolCall } from './tools/system.js';
 import { getWebTools, handleWebToolCall } from './tools/web.js';
 import { getMemoryTools, handleMemoryToolCall } from './tools/memory.js';
+import { getGitTools, handleGitToolCall } from './tools/git.js';
 
 const server = new Server(
   {
@@ -34,6 +35,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       ...getSystemTools(),
       ...getWebTools(),
       ...getMemoryTools(),
+      ...getGitTools(),
     ],
   };
 });
@@ -62,6 +64,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   if (toolName.startsWith('memory_')) {
     return await handleMemoryToolCall(request);
+  }
+
+  if (toolName.startsWith('git_')) {
+    return await handleGitToolCall(request);
   }
 
   throw new Error(`Tool not found: ${toolName}`);

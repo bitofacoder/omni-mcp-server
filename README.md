@@ -11,6 +11,7 @@ Give your local AI access to your entire workflow in seconds.
 ## ✨ Features
 
 - 🐙 **GitHub Integration**: Read repositories, list issues, search code.
+- 🌳 **Local Git**: Read local git status, diffs, and commit logs directly.
 - 💬 **Slack Integration**: Read messages, send alerts, check channels.
 - 🌐 **Web Integration**: Read any public URL and parse it as Markdown instantly. (No API key needed!)
 - 🧠 **Persistent Memory**: Claude can remember preferences and notes across all your chats.
@@ -57,6 +58,10 @@ Once connected, your AI assistant will have access to the following tools:
 
 *   `github_search_repos`: Search GitHub repositories.
 *   `github_get_issue`: Get details of a specific issue.
+*   `git_status`: Read local git status and staging area.
+*   `git_diff`: View local code changes.
+*   `git_log`: View local commit history.
+*   `git_commit`: Commit local changes with a message.
 *   `slack_send_message`: Send a message to a Slack channel.
 *   `web_fetch`: Fetch a URL and read its content as clean Markdown.
 *   `memory_store`: Save a note or context to persistent memory.
