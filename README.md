@@ -12,6 +12,7 @@ Give your local AI access to your entire workflow in seconds.
 
 - 🐙 **GitHub Integration**: Read repositories, list issues, search code.
 - 💬 **Slack Integration**: Read messages, send alerts, check channels.
+- 🌐 **Web Integration**: Read any public URL and parse it as Markdown instantly. (No API key needed!)
 - 💻 **System Dev Tools**: Read local files, list directories, run basic scripts.
 - 🔒 **Privacy First**: Everything runs locally. You bring your own tokens.
 
@@ -56,6 +57,7 @@ Once connected, your AI assistant will have access to the following tools:
 *   `github_search_repos`: Search GitHub repositories.
 *   `github_get_issue`: Get details of a specific issue.
 *   `slack_send_message`: Send a message to a Slack channel.
+*   `web_fetch`: Fetch a URL and read its content as clean Markdown.
 *   `system_read_file`: Read a local file.
 *   `system_list_dir`: List contents of a local directory.
 
