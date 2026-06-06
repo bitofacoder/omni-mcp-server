@@ -64,6 +64,7 @@ Once connected, your AI assistant will have access to the following tools:
 *   `git_log`: View local commit history.
 *   `git_commit`: Commit local changes with a message.
 *   `system_execute_command`: **(Agent Mode)** Execute a terminal command (e.g. `npm test`, `python script.py`).
+*   `system_write_file`: **(Agent Mode)** Overwrite a local file with new code/content.
 *   `slack_send_message`: Send a message to a Slack channel.
 *   `web_fetch`: Fetch a URL and read its content as clean Markdown.
 *   `memory_store`: Save a note or context to persistent memory.

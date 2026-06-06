@@ -22,6 +22,24 @@ export const getSystemTools = () => [
     },
   },
   {
+    name: 'system_write_file',
+    description: 'Write entirely new content to a local file on the system. Overwrites existing content. Use with extreme caution.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        path: {
+          type: 'string',
+          description: 'Absolute path to the file',
+        },
+        content: {
+          type: 'string',
+          description: 'The exact string content to write to the file',
+        },
+      },
+      required: ['path', 'content'],
+    },
+  },
+  {
     name: 'system_list_dir',
     description: 'List contents of a local directory',
     inputSchema: {
@@ -85,6 +103,19 @@ export const handleSystemToolCall = async (
           {
             type: 'text',
             text: JSON.stringify(formattedItems, null, 2),
+          },
+        ],
+      };
+    }
+
+    if (request.params.name === 'system_write_file') {
+      const { path: filePath, content } = request.params.arguments as any;
+      await fs.writeFile(filePath, content, 'utf-8');
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Successfully wrote to file: ${filePath}`,
           },
         ],
       };
