@@ -1,6 +1,6 @@
 {
   "name": "@bitofacoder/omni-mcp-server",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "All-in-one MCP server for GitHub, Slack, and local Dev tools",
   "main": "dist/index.js",
   "type": "module",
