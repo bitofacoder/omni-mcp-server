@@ -7,6 +7,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Model Context Protocol](https://img.shields.io/badge/MCP-Server-green.svg)](https://github.com/modelcontextprotocol)
 
+![Omni MCP Server setup wizard configuring Claude Desktop and listing all 15 bundled tools, with Agent Mode off by default](assets/demo.gif)
+
 ## Why Omni?
 
 Setting up MCP usually means installing and configuring a separate server for every capability — one for GitHub, one for filesystem, one for memory, one for fetch. Each has its own config block, its own runtime, its own startup cost.
