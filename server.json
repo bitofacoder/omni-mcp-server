@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.bitofacoder/omni-mcp-server",
-  "description": "All-in-one MCP server: GitHub, local Git, Slack, web fetch, persistent memory, and filesystem tools in a single config entry. Agent Mode is opt-in.",
+  "description": "All-in-one MCP server: GitHub, Git, Slack, web fetch, memory, and filesystem. Agent Mode opt-in.",
   "repository": {
     "url": "https://github.com/bitofacoder/omni-mcp-server",
     "source": "github"
