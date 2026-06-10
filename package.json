@@ -1,6 +1,7 @@
 {
   "name": "@bitofacoder/omni-mcp-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
+  "mcpName": "io.github.bitofacoder/omni-mcp-server",
   "description": "All-in-one MCP server: GitHub, local Git, Slack, web fetch, persistent memory, and filesystem tools in a single config entry. Agent Mode is opt-in.",
   "main": "dist/index.js",
   "type": "module",

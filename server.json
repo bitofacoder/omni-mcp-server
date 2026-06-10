@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.bitofacoder/omni-mcp-server",
+  "description": "All-in-one MCP server: GitHub, local Git, Slack, web fetch, persistent memory, and filesystem tools in a single config entry. Agent Mode is opt-in.",
+  "repository": {
+    "url": "https://github.com/bitofacoder/omni-mcp-server",
+    "source": "github"
+  },
+  "version": "1.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@bitofacoder/omni-mcp-server",
+      "version": "1.1.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "GITHUB_PERSONAL_ACCESS_TOKEN",
+          "description": "GitHub token for the GitHub tools (optional)",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        },
+        {
+          "name": "SLACK_BOT_TOKEN",
+          "description": "Slack bot token for slack_send_message (optional)",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        },
+        {
+          "name": "OMNI_AGENT_MODE",
+          "description": "Set to 'true' to enable Agent Mode (shell execution and file writes). Disabled by default.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}
