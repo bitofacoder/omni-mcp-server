@@ -1,42 +1,50 @@
 # Omni MCP Server 🚀
 
+**One MCP server instead of six.** GitHub, local Git, Slack, web fetching, persistent memory, and filesystem tools — 15 tools in a single config entry, with dangerous capabilities off by default.
+
+[![npm version](https://img.shields.io/npm/v/@bitofacoder/omni-mcp-server.svg)](https://www.npmjs.com/package/@bitofacoder/omni-mcp-server)
+[![npm downloads](https://img.shields.io/npm/dm/@bitofacoder/omni-mcp-server.svg)](https://www.npmjs.com/package/@bitofacoder/omni-mcp-server)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![Model Context Protocol](https://img.shields.io/badge/MCP-Server-green.svg)](https://github.com/modelcontextprotocol)
 
-**Omni MCP Server** is the ultimate, all-in-one Model Context Protocol (MCP) server. Instead of configuring a dozen different servers for your local AI (like Claude Desktop or Cursor), Omni bundles the most requested developer tools into a single, cohesive server.
+## Why Omni?
 
-Give your local AI access to your entire workflow in seconds.
+Setting up MCP usually means installing and configuring a separate server for every capability — one for GitHub, one for filesystem, one for memory, one for fetch. Each has its own config block, its own runtime, its own startup cost.
 
-## ✨ Features
+Omni bundles the everyday developer tools into **one server, one config entry, one `npx` command**:
 
-- 🐙 **GitHub Integration**: Read repositories, list issues, search code.
-- 🌳 **Local Git**: Read local git status, diffs, and commit logs directly.
-- 🤖 **Agent Mode (Terminal Execution)**: Claude can run shell commands, install npm packages, and run tests for you.
-- 💬 **Slack Integration**: Read messages, send alerts, check channels.
-- 🌐 **Web Integration**: Read any public URL and parse it as Markdown instantly. (No API key needed!)
-- 🧠 **Persistent Memory**: Claude can remember preferences and notes across all your chats.
-- 💻 **System Dev Tools**: Read local files, list directories, run basic scripts.
-- 🔒 **Privacy First**: Everything runs locally. You bring your own tokens.
+| You'd normally install… | With Omni |
+| --- | --- |
+| `server-github` | ✅ built in |
+| `server-filesystem` | ✅ built in |
+| `server-memory` | ✅ built in |
+| `server-fetch` | ✅ built in |
+| a git server | ✅ built in |
+| a Slack server | ✅ built in |
 
-## 🚀 Quick Start (Zero Install)
+- 🔒 **Safe by default** — shell execution and file writes are **disabled** unless you explicitly opt in to Agent Mode.
+- 🏠 **Local & private** — runs on your machine over stdio. You bring your own tokens; nothing is proxied through a third party.
+- 🪶 **Zero install** — runs straight from npm via `npx`.
 
-The easiest way to install and configure Omni is using our interactive setup wizard. You don't even need to clone the repository!
+## 🚀 Quick Start
 
-Run this single command in your terminal:
+### Interactive setup (Claude Desktop)
 
 ```bash
 npx -y @bitofacoder/omni-mcp-server@latest setup
 ```
 
-The wizard will ask for your optional API tokens (GitHub, Slack) and automatically update your Claude Desktop configuration file.
+The wizard asks for your optional tokens (GitHub, Slack), asks whether to enable Agent Mode, and updates your Claude Desktop config for you. Restart Claude Desktop and you're done.
 
-**That's it! Restart Claude Desktop and you're ready to go.**
+### Claude Code
 
----
+```bash
+claude mcp add omni -e GITHUB_PERSONAL_ACCESS_TOKEN=your_gh_token -- npx -y @bitofacoder/omni-mcp-server@latest
+```
 
-*(Advanced/Manual Setup)*
-If you prefer to configure it manually without the wizard, add this to your `claude_desktop_config.json`:
+### Manual config (Claude Desktop, Cursor, Windsurf, Codex CLI…)
+
+Add this to your client's MCP config (e.g. `claude_desktop_config.json`):
 
 ```json
 {
@@ -45,37 +53,54 @@ If you prefer to configure it manually without the wizard, add this to your `cla
       "command": "npx",
       "args": ["-y", "@bitofacoder/omni-mcp-server@latest"],
       "env": {
-         "GITHUB_PERSONAL_ACCESS_TOKEN": "your_gh_token",
-         "SLACK_BOT_TOKEN": "your_slack_token"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "your_gh_token",
+        "SLACK_BOT_TOKEN": "your_slack_token"
       }
     }
   }
 }
 ```
 
-## 🛠️ Tools Provided
+All env vars are optional — tools that need a missing token simply tell you so.
 
-Once connected, your AI assistant will have access to the following tools:
+## 🛠️ Tools (15)
 
-*   `github_search_repos`: Search GitHub repositories.
-*   `github_get_issue`: Get details of a specific issue.
-*   `git_status`: Read local git status and staging area.
-*   `git_diff`: View local code changes.
-*   `git_log`: View local commit history.
-*   `git_commit`: Commit local changes with a message.
-*   `system_execute_command`: **(Agent Mode)** Execute a terminal command (e.g. `npm test`, `python script.py`).
-*   `system_write_file`: **(Agent Mode)** Overwrite a local file with new code/content.
-*   `slack_send_message`: Send a message to a Slack channel.
-*   `web_fetch`: Fetch a URL and read its content as clean Markdown.
-*   `memory_store`: Save a note or context to persistent memory.
-*   `memory_retrieve`: Retrieve a saved memory.
-*   `system_read_file`: Read a local file.
-*   `system_list_dir`: List contents of a local directory.
+| Group | Tool | What it does |
+| --- | --- | --- |
+| 🐙 GitHub | `github_search_repos` | Search GitHub repositories |
+| | `github_get_issue` | Get details of a specific issue |
+| 🌳 Local Git | `git_status` | Working tree + staging area status |
+| | `git_diff` | View local code changes |
+| | `git_log` | View commit history |
+| | `git_commit` | Commit staged changes with a message |
+| 💻 System | `system_read_file` | Read a local file |
+| | `system_list_dir` | List a directory |
+| | `system_write_file` | ⚠️ Write a file *(Agent Mode only)* |
+| | `system_execute_command` | ⚠️ Run a shell command *(Agent Mode only)* |
+| 🌐 Web | `web_fetch` | Fetch any public URL as clean Markdown — no API key needed |
+| 🧠 Memory | `memory_store` | Save a note/preference across chats |
+| | `memory_retrieve` | Retrieve a saved memory |
+| | `memory_list` | List everything remembered |
+| 💬 Slack | `slack_send_message` | Send a message to a Slack channel |
+
+## 🔒 Agent Mode (opt-in)
+
+`system_execute_command` and `system_write_file` let the AI act on your machine — run tests, install packages, edit files. Because that's real power, **they are disabled by default** and don't even appear in the tool list until you enable them:
+
+```json
+"env": {
+  "OMNI_AGENT_MODE": "true"
+}
+```
+
+Everything else (reading files, git status, web fetch, memory) is read-only or sandboxed to its own data file.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please feel free to submit a Pull Request if you'd like to add another integration (e.g., Jira, Linear, Notion).
+PRs welcome — especially new integrations (Linear, Notion, Jira, Discord) and Agent Mode hardening (allowlists, working-dir scoping). Open an issue first for bigger changes.
+
+If Omni saved you some config wrangling, a ⭐ helps other people find it.
 
 ## 📄 License
 
-This project is open-source and licensed under the [MIT License](LICENSE).
+MIT — see [LICENSE](LICENSE).

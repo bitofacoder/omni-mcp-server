@@ -6,6 +6,12 @@ import { CallToolRequest } from '@modelcontextprotocol/sdk/types.js';
 
 const execAsync = util.promisify(exec);
 
+// Agent Mode (shell execution + file writes) is opt-in: set OMNI_AGENT_MODE=true
+const isAgentMode = () => process.env.OMNI_AGENT_MODE === 'true';
+
+const AGENT_MODE_DISABLED_MSG =
+  'Agent Mode is disabled. This tool can modify your system, so it is opt-in: set OMNI_AGENT_MODE=true in the server env config to enable it.';
+
 export const getSystemTools = () => [
   {
     name: 'system_read_file',
@@ -71,7 +77,11 @@ export const getSystemTools = () => [
       required: ['command'],
     },
   },
-];
+].filter(
+  (tool) =>
+    isAgentMode() ||
+    !['system_execute_command', 'system_write_file'].includes(tool.name)
+);
 
 export const handleSystemToolCall = async (
   request: CallToolRequest
@@ -105,6 +115,18 @@ export const handleSystemToolCall = async (
             text: JSON.stringify(formattedItems, null, 2),
           },
         ],
+      };
+    }
+
+    if (
+      ['system_write_file', 'system_execute_command'].includes(
+        request.params.name
+      ) &&
+      !isAgentMode()
+    ) {
+      return {
+        content: [{ type: 'text', text: AGENT_MODE_DISABLED_MSG }],
+        isError: true,
       };
     }
 

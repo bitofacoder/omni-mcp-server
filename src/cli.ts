@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { input } from '@inquirer/prompts';
+import { input, confirm } from '@inquirer/prompts';
 import chalk from 'chalk';
 import fs from 'fs/promises';
 import path from 'path';
@@ -30,6 +30,12 @@ async function runSetup() {
 
   const slackToken = await input({
     message: 'Enter your Slack Bot Token (or leave blank to skip):',
+  });
+
+  const agentMode = await confirm({
+    message:
+      'Enable Agent Mode? (lets the AI run shell commands and write files on this machine)',
+    default: false,
   });
 
   const configPath = await getClaudeConfigPath();
@@ -63,6 +69,7 @@ async function runSetup() {
     env: {
       ...(githubToken ? { GITHUB_PERSONAL_ACCESS_TOKEN: githubToken } : {}),
       ...(slackToken ? { SLACK_BOT_TOKEN: slackToken } : {}),
+      ...(agentMode ? { OMNI_AGENT_MODE: 'true' } : {}),
     }
   };
 

@@ -1,7 +1,7 @@
 {
   "name": "@bitofacoder/omni-mcp-server",
-  "version": "1.0.5",
-  "description": "All-in-one MCP server for GitHub, Slack, and local Dev tools",
+  "version": "1.1.0",
+  "description": "All-in-one MCP server: GitHub, local Git, Slack, web fetch, persistent memory, and filesystem tools in a single config entry. Agent Mode is opt-in.",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
@@ -15,12 +15,23 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "model context protocol",
     "ai",
+    "claude",
+    "cursor",
+    "ai-agents",
     "github",
-    "slack"
+    "slack",
+    "memory",
+    "web-fetch"
   ],
-  "author": "Your Name",
+  "author": "bitofacoder",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitofacoder/omni-mcp-server.git"
+  },
+  "homepage": "https://github.com/bitofacoder/omni-mcp-server#readme",
   "license": "MIT",
   "dependencies": {
     "@inquirer/prompts": "^8.5.2",
